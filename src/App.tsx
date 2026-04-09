@@ -320,7 +320,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-top border-gray-100">
+                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-gray-100">
                   <button
                     onClick={() => setStep('result')}
                     className="flex-1 flex items-center justify-center gap-2 text-gray-500 hover:text-spa-primary transition-colors font-sans py-4"
