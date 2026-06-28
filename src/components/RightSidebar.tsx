@@ -43,7 +43,7 @@ export default function RightSidebar({ dogName, dogBreed, dogAge, selectedArea, 
     <aside className="w-full lg:w-[280px] space-y-6 lg:shrink-0 text-left shrink-0" id="portal-right-sidebar">
       
       {/* Kintetsu Friendly Dog Pass Card (Digital Pass) */}
-      <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-spa-primary rounded-3xl p-5 shadow-lg text-white space-y-4 border border-spa-primary/30 relative overflow-hidden">
+      <div className="bg-gradient-to-br from-[#12402b] via-[#1b4d36] to-spa-primary rounded-3xl p-5 shadow-lg text-white space-y-4 border border-spa-gold/20 relative overflow-hidden">
         
         {/* Subtle background paw print decoration */}
         <div className="absolute -bottom-8 -right-8 text-white/5 pointer-events-none">
@@ -185,7 +185,7 @@ export default function RightSidebar({ dogName, dogBreed, dogAge, selectedArea, 
         {/* Ad 3: Petハイヤー */}
         <div 
           onClick={() => onOpenModal('ad_taxi')}
-          className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-4 border border-emerald-200/50 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
+          className="bg-gradient-to-br from-[#f2f6f3] to-[#e6ede8] rounded-2xl p-4 border border-emerald-300/30 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
         >
           <span className="absolute top-2 right-2 bg-emerald-500/10 text-emerald-700 text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">
             特別提携PR
@@ -207,7 +207,7 @@ export default function RightSidebar({ dogName, dogBreed, dogAge, selectedArea, 
         {/* Ad 4: Premium Food */}
         <div 
           onClick={() => onOpenModal('ad_food')}
-          className="bg-gradient-to-br from-rose-50 to-orange-50 rounded-2xl p-4 border border-rose-200/50 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
+          className="bg-gradient-to-br from-[#faf4f2] to-[#f4e6e1] rounded-2xl p-4 border border-rose-200/30 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
         >
           <span className="absolute top-2 right-2 bg-rose-500/10 text-rose-700 text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">
             提携PR

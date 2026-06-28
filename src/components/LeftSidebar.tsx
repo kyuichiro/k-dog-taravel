@@ -225,7 +225,7 @@ export default function LeftSidebar({
         {/* Ad 1: Laurel Coat */}
         <div 
           onClick={() => onOpenModal('ad_laurel')}
-          className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-2xl p-4 border border-amber-300/40 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
+          className="bg-gradient-to-br from-[#fcfaf5] to-[#f7f3e8] rounded-2xl p-4 border border-spa-gold/30 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
         >
           <span className="absolute top-2 right-2 bg-amber-500/10 text-amber-700 text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">
             特別提携PR
@@ -247,7 +247,7 @@ export default function LeftSidebar({
         {/* Ad 2: Kintetsu Pet Insurance */}
         <div 
           onClick={() => onOpenModal('ad_insurance')}
-          className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-4 border border-blue-200/50 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
+          className="bg-gradient-to-br from-[#f4f7fa] to-[#e9f0f5] rounded-2xl p-4 border border-blue-200/40 relative overflow-hidden group hover:shadow-md transition-all cursor-pointer text-left pointer-events-auto"
         >
           <span className="absolute top-2 right-2 bg-blue-500/10 text-blue-700 text-[8px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">
             提携PR

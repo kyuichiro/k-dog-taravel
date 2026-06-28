@@ -51,7 +51,7 @@ export default function GuideModal({ type, onClose, dogName }: GuideModalProps) 
         id="portal-guide-modal"
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-teal-800 to-spa-primary p-5 text-white flex justify-between items-center shrink-0">
+        <div className="bg-gradient-to-r from-[#184E34] to-spa-primary p-5 text-white flex justify-between items-center shrink-0 border-b border-white/10">
           <div className="flex items-center gap-2">
             {type === 'checklist' && <ShieldCheck size={22} className="text-spa-secondary" />}
             {type === 'etiquette' && <HeartPulse size={22} className="text-spa-secondary" />}
@@ -113,7 +113,7 @@ export default function GuideModal({ type, onClose, dogName }: GuideModalProps) 
               </div>
 
               <div>
-                <h4 className="text-xs font-bold text-teal-800 bg-teal-50 py-1.5 px-3 rounded-md mb-3 flex items-center gap-1.5">
+                <h4 className="text-xs font-bold text-emerald-800 bg-emerald-50 py-1.5 px-3 rounded-md mb-3 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-spa-primary block"></span>
                   【あると便利】快適性がグッと高まるケアグッズ
                 </h4>
@@ -145,7 +145,7 @@ export default function GuideModal({ type, onClose, dogName }: GuideModalProps) 
                 車移動や公共エリアで、{dogName}ちゃんが快適に過ごしつつ、周囲の皆様への配慮を怠らないための重要なマナー集です。
               </p>
 
-              <div className="bg-teal-50/50 rounded-2xl p-4.5 border border-teal-100 space-y-3.5">
+              <div className="bg-emerald-50/40 rounded-2xl p-4.5 border border-emerald-100 space-y-3.5">
                 <div className="flex gap-2.5">
                   <span className="bg-spa-primary text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shrink-0">1</span>
                   <div>
@@ -156,7 +156,7 @@ export default function GuideModal({ type, onClose, dogName }: GuideModalProps) 
                   </div>
                 </div>
 
-                <div className="flex gap-2.5 border-t border-teal-100/60 pt-3.5">
+                <div className="flex gap-2.5 border-t border-emerald-100/60 pt-3.5">
                   <span className="bg-spa-primary text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shrink-0">2</span>
                   <div>
                     <h5 className="font-bold text-gray-800">車内での安全確保（クレート・犬用シートベルト）</h5>
@@ -166,7 +166,7 @@ export default function GuideModal({ type, onClose, dogName }: GuideModalProps) 
                   </div>
                 </div>
 
-                <div className="flex gap-2.5 border-t border-teal-100/60 pt-3.5">
+                <div className="flex gap-2.5 border-t border-emerald-100/60 pt-3.5">
                   <span className="bg-spa-primary text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shrink-0">3</span>
                   <div>
                     <h5 className="font-bold text-gray-800">車用乗り物酔い対策</h5>
@@ -176,7 +176,7 @@ export default function GuideModal({ type, onClose, dogName }: GuideModalProps) 
                   </div>
                 </div>
 
-                <div className="flex gap-2.5 border-t border-teal-100/60 pt-3.5">
+                <div className="flex gap-2.5 border-t border-emerald-100/60 pt-3.5">
                   <span className="bg-spa-primary text-white text-[11px] font-black h-5 w-5 rounded-full flex items-center justify-center shrink-0">4</span>
                   <div>
                     <h5 className="font-bold text-gray-800">公共空間・ホテルの基本ルール</h5>
@@ -207,10 +207,10 @@ export default function GuideModal({ type, onClose, dogName }: GuideModalProps) 
                 <div className="text-xs text-amber-700/85 mb-4">カルテに表示された、全国のおすすめペット宿が、予約決済時に以下のクーポンコード入力で割引適用されます。</div>
                 
                 <div className="bg-white rounded-xl p-3 border border-amber-200 inline-flex items-center gap-4 shadow-xs">
-                  <span className="font-mono text-xl font-extrabold text-teal-800 tracking-wider">KINTETSU_DOG2026</span>
+                  <span className="font-mono text-xl font-extrabold text-spa-primary tracking-wider">KINTETSU_DOG2026</span>
                   <button 
                     onClick={handleCopy}
-                    className="p-2 rounded-lg bg-spa-primary text-white hover:bg-teal-700 transition-colors flex items-center gap-1.5 text-xs font-bold pointer-events-auto"
+                    className="p-2 rounded-lg bg-spa-primary text-white hover:bg-spa-primary/95 transition-colors flex items-center gap-1.5 text-xs font-bold pointer-events-auto"
                   >
                     {copied ? (
                       <>

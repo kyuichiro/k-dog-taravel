@@ -12,7 +12,8 @@ import {
   Search, 
   Compass, 
   ArrowRight,
-  Info
+  Info,
+  Download
 } from 'lucide-react';
 import { 
   TRAVEL_TYPES, 
@@ -138,6 +139,201 @@ export default function App() {
     setCurrentSelectedFacility(facility);
   };
 
+  const handleExportHtml = () => {
+    const character = characterInfo.name;
+    const characterDesc = characterInfo.description.replaceAll('ワンちゃん', dogName + 'ちゃん').replaceAll('愛犬', dogName + 'ちゃん');
+    const characterAdvice = `お出かけのおすすめ: ${dogName}ちゃん（${dogBreed || 'トイプードル'}・${dogAge}才）の得意な空間やペースを確保し、ストレスを最小限に抑えるのがおすすめです。`;
+    const styleRecommend = travelType.recommendation.stay;
+    const longDesc = travelType.description.replaceAll('ワンちゃん', dogName + 'ちゃん');
+    const area = selectedArea || '伊勢志摩';
+
+    const htmlString = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${dogName}ちゃんの旅カルテ - 近鉄フレンドリードッグ旅診断</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Noto+Serif+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Noto Serif JP"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            spa: {
+              primary: '#12402b',
+              secondary: '#f4f0e6',
+              bg: '#faf9f6',
+              text: '#232d29',
+              gold: '#c39e6c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .card-shadow { box-shadow: 0px 4px 20px rgba(18, 64, 43, 0.04); }
+  </style>
+</head>
+<body class="bg-spa-bg text-spa-text font-sans antialiased min-h-screen flex flex-col">
+  <header class="bg-white border-b border-spa-secondary/80 sticky top-0 z-40 px-4 py-3.5 sm:px-6">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-spa-primary rounded-xl flex items-center justify-center text-white">
+          <i data-lucide="compass" class="w-5 h-5 text-spa-secondary"></i>
+        </div>
+        <div>
+          <span class="text-[9px] font-bold uppercase tracking-widest text-spa-primary block">Kintetsu Friendly Dog Spa</span>
+          <h1 class="font-serif font-bold text-sm sm:text-base tracking-tight text-spa-primary leading-tight">愛犬お出かけカルテ診断</h1>
+        </div>
+      </div>
+      <span class="text-xs font-bold text-spa-gold font-serif">診断日: 2026年6月</span>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-8 space-y-8">
+    <!-- Main Karte -->
+    <div class="bg-white rounded-3xl p-6 sm:p-10 border border-spa-secondary/60 card-shadow space-y-6">
+      
+      <!-- Top Profile Banner -->
+      <div class="bg-spa-primary/5 rounded-[32px] p-6 sm:p-10 border-2 border-spa-primary/20 space-y-6 text-center">
+        <div class="flex justify-between items-center border-b border-spa-primary/10 pb-4 max-w-xl mx-auto">
+          <span class="text-[10px] font-bold text-spa-gold tracking-widest uppercase font-serif">KINTETSU FRIENDLY DOG DIAGNOSIS</span>
+          <span class="text-[10px] font-bold text-spa-primary bg-spa-secondary px-3 py-1 rounded-full font-serif">保存版カルテ</span>
+        </div>
+        
+        <div class="space-y-2">
+          <h2 class="font-serif font-black text-2xl sm:text-4xl text-spa-primary leading-tight tracking-tight">
+            ${dogName}ちゃんの旅カルテ
+          </h2>
+        </div>
+        
+        <div class="inline-flex items-center gap-6 bg-white px-6 py-3 rounded-2xl border border-spa-secondary/80 text-xs text-gray-650">
+          <div><span class="font-bold text-gray-400 text-[10px] block mb-0.5">犬種</span><span class="font-bold text-spa-primary">${dogBreed}</span></div>
+          <div class="h-8 w-px bg-spa-secondary"></div>
+          <div><span class="font-bold text-gray-400 text-[10px] block mb-0.5">年齢</span><span class="font-bold text-spa-primary">${dogAge}才</span></div>
+          <div class="h-8 w-px bg-spa-secondary"></div>
+          <div><span class="font-bold text-gray-400 text-[10px] block mb-0.5">お出かけエリア</span><span class="font-bold text-spa-primary">${area}</span></div>
+        </div>
+      </div>
+
+      <!-- Character Profiler -->
+      <div class="grid md:grid-cols-3 gap-6 items-stretch">
+        <div class="md:col-span-2 bg-gradient-to-r from-emerald-50/55 to-spa-secondary/35 p-6 rounded-2xl flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-spa-primary flex items-center gap-1.5 mb-2 font-serif">
+              <i data-lucide="heart" class="w-5 h-5 text-spa-primary fill-spa-primary/15"></i>
+              愛犬カルテプロファイル：${character}
+            </h3>
+            <p class="text-xs sm:text-sm text-gray-650 leading-relaxed font-sans">
+              ${characterDesc}
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-emerald-100 text-[11px] text-gray-500 font-medium font-sans">
+            ${characterAdvice}
+          </div>
+        </div>
+        
+        <div class="bg-spa-secondary/35 p-5 rounded-2xl border border-spa-secondary/80 flex flex-col justify-center items-center text-center">
+          <i data-lucide="award" class="w-10 h-10 text-spa-gold mb-2"></i>
+          <span class="text-[9px] font-black uppercase tracking-widest text-spa-primary block">TRAVEL COMPATIBILITY</span>
+          <h4 class="text-sm font-bold text-spa-primary mt-1 font-serif">おすすめスタイル</h4>
+          <p class="text-xs text-gray-500 mt-1.5 leading-relaxed font-sans">
+            ${styleRecommend}
+          </p>
+        </div>
+      </div>
+
+      <!-- Narrative -->
+      <div class="mt-6">
+        <p class="text-sm text-gray-650 leading-relaxed bg-emerald-50/10 border-l-4 border-spa-primary p-4 rounded-r-xl font-serif">
+          ${longDesc}
+        </p>
+      </div>
+
+      <!-- Checked Benefits / Passport Banner -->
+      <div class="bg-gradient-to-br from-[#12402b] via-[#1b4d36] to-spa-primary rounded-3xl p-6 text-white space-y-4 border border-spa-gold/20 relative overflow-hidden">
+        <div class="absolute -bottom-8 -right-8 text-white/5 pointer-events-none">
+          <i data-lucide="paw-print" class="w-32 h-32"></i>
+        </div>
+        <div class="flex justify-between items-start border-b border-white/10 pb-3 relative z-10">
+          <div>
+            <span class="text-[9px] text-spa-gold tracking-widest font-bold uppercase block">DIGITAL SERVICEPASS</span>
+            <h4 class="font-serif font-black text-base text-white mt-0.5 tracking-tight">近鉄フレンドリードッグパス</h4>
+          </div>
+          <span class="text-[8px] bg-spa-gold text-spa-primary font-black px-2.5 py-1 rounded uppercase tracking-wider shadow-sm">
+            VALID PASSPORT
+          </span>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs pt-2 relative z-10">
+          <div>
+            <span class="text-[9px] text-spa-secondary/60 block font-bold">OWNER'S DOG</span>
+            <span class="font-bold text-white tracking-wide block truncate">${dogName} ちゃん</span>
+          </div>
+          <div>
+            <span class="text-[9px] text-spa-secondary/60 block font-bold">BREED / AGE</span>
+            <span class="font-bold text-white tracking-wide block truncate">${dogBreed} (${dogAge}才)</span>
+          </div>
+          <div>
+            <span class="text-[9px] text-spa-secondary/60 block font-bold">APPROVED REGION</span>
+            <span class="text-white font-bold tracking-wider">${area} 提携エリア</span>
+          </div>
+        </div>
+        <p class="text-[10px] text-spa-secondary/70 leading-normal pt-2 border-t border-white/5 relative z-10 font-sans">
+          ※本パスポート画面を対象の宿やドッグカフェ、近鉄サービス窓口等に提示することで、各種特別アメニティやドッグ温泉の優待が受けられます。
+        </p>
+      </div>
+    </div>
+
+    <!-- Instructions / Promotion links -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-spa-secondary/60 card-shadow space-y-4 text-left">
+        <h4 class="font-serif font-bold text-sm text-spa-primary flex items-center gap-1.5 border-b border-gray-100 pb-2">
+          <i data-lucide="shield-check" class="w-4 h-4 text-spa-primary"></i>お出かけマナー & 持ち物
+        </h4>
+        <p class="text-xs text-gray-500 leading-relaxed font-sans">
+          旅先でスマートに楽しく過ごすために、予防注射済証・マナーシーツ・マナーパンツは必ずご準備ください。車内ではクレートに入れ、こまめな休憩を取りましょう。
+        </p>
+      </div>
+      <div class="bg-amber-50 rounded-3xl p-6 border border-amber-200 text-center space-y-3">
+        <span class="text-[9px] font-black uppercase tracking-widest text-amber-800 block">SPECIAL OFFER</span>
+        <h4 class="font-serif font-black text-lg text-amber-900">宿泊代金 10% OFF</h4>
+        <p class="text-[10px] text-amber-700/85">ご予約の際に以下のコードを入力して適用してください。</p>
+        <div class="bg-white rounded-xl p-2.5 border border-amber-200 inline-block font-mono text-sm font-extrabold text-spa-primary tracking-wider">
+          KINTETSU_DOG2026
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white border-t border-spa-secondary/60 py-6 text-center text-xs text-gray-400 mt-auto">
+    <p>© 2026 Kintetsu Friendly Dog Spa. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>`;
+
+    const blob = new Blob([htmlString], { type: 'text/html;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${dogName}ちゃんの旅お出かけカルテ.html`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const containerVariants = {
     initial: { opacity: 0, scale: 0.98, y: 10 },
     animate: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
@@ -218,7 +414,7 @@ export default function App() {
                 </p>
                 <button
                   onClick={() => setStep('q1')}
-                  className="bg-spa-primary text-white w-full max-w-sm mx-auto py-4 rounded-full text-lg font-bold font-sans hover:bg-teal-700 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-lg shadow-spa-primary/35 cursor-pointer pointer-events-auto"
+                  className="bg-spa-primary text-white w-full max-w-sm mx-auto py-4 rounded-full text-lg font-bold font-sans hover:opacity-90 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-lg shadow-spa-primary/35 cursor-pointer pointer-events-auto"
                 >
                   診断をはじめよう！ <ArrowRight size={20} />
                 </button>
@@ -524,9 +720,9 @@ export default function App() {
 
                   {/* Character Profile & Narrative */}
                   <div className="grid md:grid-cols-3 gap-6 mt-6 items-stretch font-sans">
-                    <div className="md:col-span-2 bg-gradient-to-r from-teal-50 to-spa-secondary/30 p-6 rounded-2xl flex flex-col justify-between">
+                    <div className="md:col-span-2 bg-gradient-to-r from-emerald-50/55 to-spa-secondary/35 p-6 rounded-2xl flex flex-col justify-between">
                       <div>
-                        <h3 className="text-lg font-bold text-teal-900 flex items-center gap-1.5 mb-2">
+                        <h3 className="text-lg font-bold text-spa-primary flex items-center gap-1.5 mb-2">
                           <Heart size={18} className="text-spa-primary fill-spa-primary/20" />
                           愛犬カルテプロファイル： {dogName}ちゃんは 「{characterInfo.name}」
                         </h3>
@@ -534,7 +730,7 @@ export default function App() {
                           {characterInfo.description.replaceAll('ワンちゃん', dogName + 'ちゃん').replaceAll('愛犬', dogName + 'ちゃん')}
                         </p>
                       </div>
-                      <div className="mt-4 pt-3 border-t border-teal-100 text-xs text-gray-500 font-medium">
+                      <div className="mt-4 pt-3 border-t border-emerald-100 text-xs text-gray-500 font-medium">
                         お出かけのおすすめ: {dogName}ちゃん（{dogBreed || 'トイプードル'}・{dogAge}才）の得意な空間やペースを確保し、ストレスを最小限に抑えるのがおすすめです。
                       </div>
                     </div>
@@ -551,7 +747,7 @@ export default function App() {
                   </div>
 
                   <div className="mt-6">
-                    <p className="text-sm text-gray-600 leading-relaxed bg-teal-50/10 border-l-4 border-spa-primary p-4 rounded-r-xl font-sans">
+                    <p className="text-sm text-gray-600 leading-relaxed bg-emerald-50/10 border-l-4 border-spa-primary p-4 rounded-r-xl font-sans">
                       {travelType.description.replaceAll('ワンちゃん', dogName + 'ちゃん').replaceAll('内弁慶ちゃん', dogName + 'ちゃん').replaceAll('ワンパクちゃん', dogName + 'ちゃん').replaceAll('姫・王子ちゃん', dogName + 'ちゃん').replaceAll('箱入りちゃん', dogName + 'ちゃん')}
                     </p>
                   </div>
@@ -577,7 +773,7 @@ export default function App() {
                       }}
                       className={`border-2 rounded-2xl overflow-hidden cursor-pointer transition-all ${selectedCategory === '泊まる' ? 'border-spa-primary ring-2 ring-spa-primary/10 shadow-md' : 'border-gray-100 hover:border-spa-primary/40 shadow-sm'}`}
                     >
-                      <div className="bg-teal-750 bg-teal-700 text-white p-3 flex justify-between items-center">
+                      <div className="bg-spa-primary text-white p-3 flex justify-between items-center">
                         <span className="font-bold text-xs tracking-widest uppercase flex items-center gap-1.5">
                           <Hotel size={14} /> 泊まる（宿泊）
                         </span>
@@ -615,7 +811,7 @@ export default function App() {
                       }}
                       className={`border-2 rounded-2xl overflow-hidden cursor-pointer transition-all ${selectedCategory === '食べる' ? 'border-spa-primary ring-2 ring-spa-primary/10 shadow-md' : 'border-gray-100 hover:border-spa-primary/40 shadow-sm'}`}
                     >
-                      <div className="bg-emerald-700 text-white p-3 flex justify-between items-center">
+                      <div className="bg-emerald-800 text-white p-3 flex justify-between items-center">
                         <span className="font-bold text-xs tracking-widest uppercase flex items-center gap-1.5">
                           <Utensils size={14} /> 食べる（同伴店）
                         </span>
@@ -653,7 +849,7 @@ export default function App() {
                       }}
                       className={`border-2 rounded-2xl overflow-hidden cursor-pointer transition-all ${selectedCategory === '遊ぶ' ? 'border-spa-primary ring-2 ring-spa-primary/10 shadow-md' : 'border-gray-100 hover:border-spa-primary/40 shadow-sm'}`}
                     >
-                      <div className="bg-amber-700 text-white p-3 flex justify-between items-center">
+                      <div className="bg-[#c39e6c] text-white p-3 flex justify-between items-center">
                         <span className="font-bold text-xs tracking-widest uppercase flex items-center gap-1.5">
                           <Compass size={14} /> 遊ぶ・楽しむメニュー
                         </span>
@@ -703,7 +899,7 @@ export default function App() {
                   >
                     <div className="flex justify-between items-center border-b border-spa-primary/10 pb-4">
                       <div>
-                        <h4 className="text-lg font-bold text-teal-900 flex items-center gap-1.5 leading-snug">
+                        <h4 className="text-lg font-bold text-spa-primary flex items-center gap-1.5 leading-snug">
                           <Search size={18} />
                           【{currentSelectedFacility.name}】周辺の〇km圏内推奨店リスト
                         </h4>
@@ -716,7 +912,7 @@ export default function App() {
                           setSelectedCategory(null);
                           setCurrentSelectedFacility(null);
                         }}
-                        className="text-xs font-bold text-teal-700 bg-white border border-teal-200 hover:bg-teal-50 px-3 py-1.5 rounded-full transition-all cursor-pointer pointer-events-auto shrink-0"
+                        className="text-xs font-bold text-spa-primary bg-white border border-spa-primary/30 hover:bg-spa-secondary/35 px-3 py-1.5 rounded-full transition-all cursor-pointer pointer-events-auto shrink-0"
                       >
                         閉じる
                       </button>
@@ -727,7 +923,7 @@ export default function App() {
                         <div key={index} className="bg-white p-4.5 rounded-2xl shadow-xs border border-spa-secondary/40 hover:border-spa-primary transition-all flex flex-col justify-between">
                           <div>
                             <div className="flex justify-between items-start mb-2">
-                              <span className="inline-block bg-teal-50 text-spa-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                              <span className="inline-block bg-spa-secondary text-spa-primary text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">
                                 {nf.category} ✕ {selectedArea}
                               </span>
                               <span className="text-xs font-bold font-mono text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full">
@@ -751,19 +947,28 @@ export default function App() {
                 )}
 
                 {/* Bottom Actions to Reset flow */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-6 font-sans">
+                <div className="space-y-4 pt-6 font-sans">
                   <button
-                    onClick={() => setStep('q5')}
-                    className="flex-1 flex items-center justify-center gap-2 text-gray-400 hover:text-spa-primary transition-colors py-4 font-bold text-sm bg-white rounded-full border border-gray-100 active:scale-98 cursor-pointer pointer-events-auto"
+                    onClick={handleExportHtml}
+                    className="w-full flex items-center justify-center gap-2 bg-spa-gold text-white py-4 rounded-full font-bold hover:opacity-90 active:scale-98 transition-all shadow-lg shadow-spa-gold/25 cursor-pointer pointer-events-auto text-base"
                   >
-                    <ChevronLeft size={20} /> 前の入力へ戻る
+                    <Download size={20} /> このカルテを1枚のHTMLとしてエクスポート（保存）する
                   </button>
-                  <button
-                    onClick={reset}
-                    className="flex-1 flex items-center justify-center gap-2 bg-spa-primary text-white py-4 rounded-full font-bold hover:bg-teal-700 active:scale-98 transition-all shadow-lg shadow-spa-primary/20 cursor-pointer pointer-events-auto"
-                  >
-                    <Home size={20} /> 新しい診断カルテを作成する
-                  </button>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button
+                      onClick={() => setStep('q5')}
+                      className="flex-1 flex items-center justify-center gap-2 text-gray-400 hover:text-spa-primary transition-colors py-4 font-bold text-sm bg-white rounded-full border border-gray-100 active:scale-98 cursor-pointer pointer-events-auto"
+                    >
+                      <ChevronLeft size={20} /> 前の入力へ戻る
+                    </button>
+                    <button
+                      onClick={reset}
+                      className="flex-1 flex items-center justify-center gap-2 bg-spa-primary text-white py-4 rounded-full font-bold hover:opacity-90 active:scale-98 transition-all shadow-lg shadow-spa-primary/20 cursor-pointer pointer-events-auto"
+                    >
+                      <Home size={20} /> 新しい診断カルテを作成する
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             )}
